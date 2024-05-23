@@ -7,11 +7,19 @@ import Grid from "@mui/material/Grid"
 import Box from "@mui/material/Box"
 import Button from "@mui/material/Button"
 import { Link, useNavigate } from "react-router-dom"
-
 import TextField from "@mui/material/TextField"
+import {Formik , Form } from "formik"
+import { object, string, number, date, InferType } from 'yup'
+
 
 const Register = () => {
-  const navigate = useNavigate()
+  const registerSchema = object({
+    username: string().required(),
+    firstname: string().required(),
+    lastname: string().required(),
+    email: string().email(),
+    password: string().required(),
+  })
 
   return (
     <Container maxWidth="lg">
@@ -51,10 +59,15 @@ const Register = () => {
             Register
           </Typography>
 
-          <Box
-            component="form"
-            sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+          <Formik
+          initialValues={{username:"", firstname:"", lastname:"", email:"", password:""}}
+          validationSchema={registerSchema}
+          onSubmit={(values , actions ) =>{
+            actions.resetForm()
+          }}
           >
+            <Form>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
             <TextField
               label="User Name"
               name="username"
@@ -72,7 +85,7 @@ const Register = () => {
             <TextField
               label="Last Name"
               name="last_name"
-              id="last_name"
+              id="lastname"
               type="text"
               variant="outlined"
             />
@@ -84,7 +97,7 @@ const Register = () => {
               variant="outlined"
             />
             <TextField
-              label="password"
+              label="Password"
               name="password"
               id="password"
               type="password"
@@ -94,6 +107,10 @@ const Register = () => {
               Submit
             </Button>
           </Box>
+          </Form>
+          </Formik>
+
+          
 
           <Box sx={{ textAlign: "center", mt: 2 }}>
             <Link to="/">Do you have an account?</Link>
