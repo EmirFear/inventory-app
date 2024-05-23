@@ -35,7 +35,7 @@ const Register = () => {
       >
         <Grid item xs={12}>
           <Typography variant="h3" color="primary" align="center">
-            STOCK APP
+            Inventory APP
           </Typography>
         </Grid>
 
@@ -66,6 +66,7 @@ const Register = () => {
             actions.resetForm()
           }}
           >
+            {({values,errors,touched,handleChange,handleBlur,handleSubmit,isSubmitting}) =>(
             <Form>
             <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
             <TextField
@@ -74,6 +75,9 @@ const Register = () => {
               id="userName"
               type="text"
               variant="outlined"
+              value={values.username}
+              onChange={handleChange}
+              onBlur={handleBlur}
             />
             <TextField
               label="First Name"
@@ -81,6 +85,9 @@ const Register = () => {
               id="firstName"
               type="text"
               variant="outlined"
+              value={values.firstname}
+              onChange={handleChange}
+              onBlur={handleBlur}
             />
             <TextField
               label="Last Name"
@@ -88,6 +95,9 @@ const Register = () => {
               id="lastname"
               type="text"
               variant="outlined"
+              value={values.lastname}
+              onChange={handleChange}
+              onBlur={handleBlur}
             />
             <TextField
               label="Email"
@@ -95,6 +105,9 @@ const Register = () => {
               id="email"
               type="email"
               variant="outlined"
+              value={values.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
             />
             <TextField
               label="Password"
@@ -102,12 +115,18 @@ const Register = () => {
               id="password"
               type="password"
               variant="outlined"
+              value={values.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
             />
             <Button type="submit" variant="contained" size="large">
               Submit
             </Button>
           </Box>
-          </Form>
+          </Form>              
+              
+            )}
+
           </Formik>
 
           
