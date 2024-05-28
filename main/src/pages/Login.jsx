@@ -10,6 +10,7 @@ import TextField from "@mui/material/TextField"
 import { Button } from "@mui/material"
 import {Formik , Form} from "formik"
 import { object, string, number, date, InferType } from 'yup'
+import { login } from "../services/apiRequest"
 
 
 
@@ -70,6 +71,8 @@ const Login = () => {
           onSubmit={ (values, actions)=>{
              actions.resetForm()
              actions.setSubmitting(false)
+
+             login(values)
              
 
 
