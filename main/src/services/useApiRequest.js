@@ -7,12 +7,13 @@ import { useNavigate } from "react-router-dom"
 
 
 
-const useApirequest = () => {
-    const login = async(userData) => {
+const useApiRequest = () => {
+    
         const dispatch = useDispatch()
         const navigate = useNavigate()
 
-    
+
+        const login = async(userData) => {
         dispatch(fetchStart())    
     
         try {
