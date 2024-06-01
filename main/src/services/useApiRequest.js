@@ -19,7 +19,7 @@ const useApiRequest = () => {
       navigate("/stock")
     } catch (error) {
       dispatch(fetchFail())
-      toastErrorNotify("Login başarısız oldu")
+      toastErrorNotify(error.response?.data?.message || "Login başarısız oldu")
     }
   }
 
