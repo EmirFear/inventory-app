@@ -10,6 +10,8 @@ export const login = async(userData) => {
 
     try {
         const {data} = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/login`, userData)
+
+        dispatch(loginSuccess(data))
         toastSuccessNotify("Login işlemi başarılı")
         console.log(data);
         return data

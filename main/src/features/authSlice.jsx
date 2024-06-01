@@ -15,6 +15,12 @@ const authSlice = createSlice({
       state.loading = true
     }
   },
+
+  loginSuccess : (state, { payload })=> {
+    state.loading = false
+    state.user = payload.user.username
+    state.token = payload.token
+  }
 })
 
 export const { fetchStart } = authSlice.actions
