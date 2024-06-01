@@ -1,6 +1,6 @@
 import axios from "axios"
 import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify"
-import { fetchStart } from "../features/authSlice"
+import { fetchFail, fetchStart, loginSuccess, } from "../features/authSlice"
 import { useDispatch } from "react-redux"
 
 export const login = async(userData) => {
@@ -16,6 +16,7 @@ export const login = async(userData) => {
         console.log(data);
         return data
     } catch (error){
+        dispatch(fetchFail())
         console.log(error);
         toastErrorNotify("Login başarısız oldu")
 
