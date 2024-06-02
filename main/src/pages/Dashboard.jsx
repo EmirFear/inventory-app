@@ -7,8 +7,14 @@ import Toolbar from "@mui/material/Toolbar"
 import Button from "@mui/material/Button"
 import Typography from "@mui/material/Typography"
 import { useSelector } from "react-redux"
+import useApiRequest from "../services/useApiRequest"
 
 function Dashboard() {
+  const {logout} = useApiRequest()
+
+
+
+
   const { user } = useSelector((state) => state.auth)
 
   return (
@@ -19,7 +25,9 @@ function Dashboard() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Inventory app
           </Typography>
-          {user && (<Button color="inherit">Logout</Button>)}
+          {user && 
+          (<Button color="inherit" onClick={logout}>Logout</Button>)
+          }
         </Toolbar>
       </AppBar>
     </Box>

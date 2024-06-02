@@ -2,7 +2,7 @@ import Container from "@mui/material/Container"
 import Typography from "@mui/material/Typography"
 import Avatar from "@mui/material/Avatar"
 import LockIcon from "@mui/icons-material/Lock"
-import image from "../assets/result.svg"
+import image from "../img/login.png"
 import Grid from "@mui/material/Grid"
 import Box from "@mui/material/Box"
 import Button from "@mui/material/Button"
@@ -161,7 +161,7 @@ const Register = () => {
 
         <Grid item xs={0} sm={7} md={6}>
           <Container>
-            <img src={image} alt="" />
+            <img src={image} alt="" width={300}/>
           </Container>
         </Grid>
       </Grid>

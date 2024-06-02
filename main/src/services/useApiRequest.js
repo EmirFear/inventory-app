@@ -1,12 +1,13 @@
 import axios from "axios"
 import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify"
-import { fetchFail, fetchStart, loginSuccess, registerSuccess } from "../features/authSlice"
-import { useDispatch } from "react-redux"
+import { fetchFail, fetchStart, loginSuccess, registerSuccess, logoutSuccess } from "../features/authSlice"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
 const useApiRequest = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { token } = useSelector((state) => state.auth.token )
 
   const login = async (userData) => {
     dispatch(fetchStart())
@@ -40,7 +41,19 @@ const useApiRequest = () => {
   }
 
   const logout = async () => {
-  }
+    dispatch(fetchStart())
+    try {
+      await axios(`${process.env.REACT_APP_BASE_URL}/auth/logout`, {
+        headers: {Authorization: `Token ${token}`}
+      })
+      dispatch(logoutSuccess())
+      toastSuccessNotify("Çıkış işlemi başarılı")
+      navigate("/login")
+    } catch (error) {
+      dispatch(fetchFail())
+      toastErrorNotify("Çıkış işlemi başarısız")
+
+  }}
 
   return { login, register, logout }
 }
