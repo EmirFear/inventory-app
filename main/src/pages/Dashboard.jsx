@@ -16,7 +16,7 @@ function Dashboard() {
       <AppBar position="fixed">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            STOCK APP
+            Inventory app
           </Typography>
           {currentUser && <Button color="inherit">Logout</Button>}
         </Toolbar>
