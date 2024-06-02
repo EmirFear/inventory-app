@@ -37,7 +37,6 @@ function Dashboard() {
 export default Dashboard */
 
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -54,6 +53,9 @@ import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import { useSelector } from 'react-redux';
+import useApiRequest from '../services/useApiRequest';
 
 const drawerWidth = 240;
 
@@ -61,6 +63,13 @@ function Dashboard(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
+
+
+  const { user } = useSelector((state) => state.auth)
+  const {logout} = useApiRequest()
+
+
+
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -132,9 +141,14 @@ function Dashboard(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Responsive drawer
+          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
+            Inventory App
           </Typography>
+          {user && 
+          (<Button color="inherit" onClick={logout}>Logout</Button>)
+          }
+
+
         </Toolbar>
       </AppBar>
       <Box
