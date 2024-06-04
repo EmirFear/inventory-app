@@ -1,10 +1,14 @@
-import React from 'react'
+import { useEffect } from "react"
+import useStockRequest from "../services/useStockRequest"
 
 const Firms = () => {
-  return (
-    <div>
-      
-    </div>
+  const {getFirms} = useStockRequest()
+
+  useEffect(()=> {
+    getFirms()
+
+  }, [])
+  return (<div> </div>
   )
 }
 
