@@ -1,19 +1,19 @@
-import axios from "axios"
 import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify"
 import { fetchFail, fetchStart, loginSuccess, registerSuccess, logoutSuccess } from "../features/authSlice"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import useAxios from "./useAxios"
 
 const useApiRequest = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { token } = useSelector((state) => state.auth.token )
+  const { axiosToken, axiosPublic } = useAxios()
 
   const login = async (userData) => {
     dispatch(fetchStart())
 
     try {
-      const { data } = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/login`, userData)
+      const { data } = await axiosPublic.post("/auth/login/", userData)
 
       dispatch(loginSuccess(data))
       toastSuccessNotify("Login işlemi başarılı")
@@ -28,7 +28,7 @@ const useApiRequest = () => {
     dispatch(fetchStart())
 
     try {
-      const { data } = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/register`, userData)
+      const { data } = await axiosPublic.post("/users/", userData)
 
       dispatch(registerSuccess(data))
       toastSuccessNotify("Kayıt işlemi başarılı")
@@ -43,9 +43,7 @@ const useApiRequest = () => {
   const logout = async () => {
     dispatch(fetchStart())
     try {
-      await axios(`${process.env.REACT_APP_BASE_URL}/auth/logout`, {
-        headers: {Authorization: `Token ${token}`}
-      })
+      await axiosToken.get("/auth/logout")
       dispatch(logoutSuccess())
       toastSuccessNotify("Çıkış işlemi başarılı")
       navigate("/login")
