@@ -49,23 +49,31 @@ const MenuList = () => {
 
 
     
-  return (
-    <div>
-          <List>
-        {icons.map((item, index) => (
-          <ListItem 
-          key={index} 
-          disablePadding  
-          onClick={() => navigate (item.path) }>
-            <ListItemButton>
-              <ListItemIcon> {item.iconName} </ListItemIcon>
-              <ListItemText primary={item.title} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </div>
+  
+    return (
+      <div>
+        <List>
+          {icons.map((item, index) => (
+            <ListItem
+              key={index}
+              disablePadding
+              onClick={() => navigate(item.path)}
+              sx={{
+                color: "white",
+                "& .MuiSvgIcon-root": { color: "white" },
+                "&:hover": { color: "red" },
+                "&:hover .MuiSvgIcon-root": { color: "red" },
+              }}
+            >
+              <ListItemButton>
+                <ListItemIcon>{item.iconName}</ListItemIcon>
+                <ListItemText primary={item.title} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      </div>
   )
-}
+  }
 
 export default MenuList
